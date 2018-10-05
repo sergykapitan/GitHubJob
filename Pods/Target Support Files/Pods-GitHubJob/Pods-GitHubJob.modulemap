@@ -1,0 +1,6 @@
+framework module Pods_GitHubJob {
+  umbrella header "Pods-GitHubJob-umbrella.h"
+
+  export *
+  module * { export * }
+}
