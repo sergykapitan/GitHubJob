@@ -29,21 +29,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let afDelegate = Alamofire.SessionManager.default.delegate
         
-        afDelegate.taskDidComplete = { urlSession, urlSessionTask, error in
-            print("Task did complete")
-        }
-        
-        afDelegate.dataTaskDidReceiveResponse = { urlSession, urlSessionDataTask, urlResponse in
-            print("Data task did receive response")
-            let urlsrd = URLSession.ResponseDisposition(rawValue: 1)
-            return urlsrd!
+       
+       
             
         }
         
         
-    }
+    
     
     
      @IBOutlet weak var UserText: UITextField!
@@ -53,16 +46,17 @@ class ViewController: UIViewController {
     @IBAction func searchButton(_ sender: Any) {
   
         
-          let userText2 = UserText.text?.lowercased()
-    
+     let userText2 = UserText.text?.lowercased()
         
- 
+     let gitUrl:String = "https://jobs.github.com/positions.json?search="
+        
+    for i in 0...8 {
     //закрытие клавиатуры
 //--------------------------------------alamofire------------------------------------------------------------------
+    let pageNumder = String(i)
         
         
-        
-                Alamofire.request("https://jobs.github.com/positions.json?search=" + userText2! + "&amp;page=0", method: .get).responseJSON { response in
+    Alamofire.request(gitUrl + userText2! + "&amp;page=" + pageNumder, method: .get).responseJSON { response in
                     guard response.result.isSuccess else {                  //Возвращает значение "true", если результат успешен
                         print("Ошибка при запросе данных\(String(describing: response.result.error))")
                         return
@@ -96,7 +90,7 @@ class ViewController: UIViewController {
                     
                 }
                 
-                
+        }
                 
                UserText.resignFirstResponder()
 

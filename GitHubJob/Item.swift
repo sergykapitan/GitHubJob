@@ -15,5 +15,5 @@ struct Item {
     let title: String
     let location: String
     let company_logo: String
-    let details: String
+    let details: String 
 }
