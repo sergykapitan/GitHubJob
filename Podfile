@@ -5,4 +5,5 @@ use_frameworks!
 
 target 'GitHubJob' do
 pod 'Alamofire', '~> 4.5'
+pod 'SVProgressHUD'
 end

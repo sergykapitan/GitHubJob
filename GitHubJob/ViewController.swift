@@ -9,8 +9,7 @@
 import UIKit
 import Foundation
 import Alamofire
-
-
+import SVProgressHUD
 
 
  //fileprivate
@@ -45,14 +44,13 @@ class ViewController: UIViewController {
    
     @IBAction func searchButton(_ sender: Any) {
   
-        
+     SVProgressHUD.show(withStatus: "Please Wait....")
      let userText2 = UserText.text?.lowercased()
-        
+     UserText.resignFirstResponder()
      let gitUrl:String = "https://jobs.github.com/positions.json?search="
         
     for i in 0...8 {
-    //закрытие клавиатуры
-//--------------------------------------alamofire------------------------------------------------------------------
+    
     let pageNumder = String(i)
         
         
@@ -71,7 +69,8 @@ class ViewController: UIViewController {
                     
                     
              
-                    
+       
+
                     for itm in arrayOfItems {
                         let item = Item(
                          
@@ -86,23 +85,24 @@ class ViewController: UIViewController {
                             
                         )
                         self.items.append(item)
-                    }
-                    
+                        
+                       
+        }
+        
+  
+       
                 }
                 
         }
-                
-               UserText.resignFirstResponder()
-
+        
+        
        
-    
             
-              DispatchQueue.main.async {
+        DispatchQueue.main.async {
                 self.TableView.reloadData()
              }
-        
-        
-        
+      
+         SVProgressHUD.dismiss(withDelay: 3)
     
     }   //Button
     
@@ -114,12 +114,12 @@ class ViewController: UIViewController {
               }
     
         
-   
+  
    
     
-    }  //ViewController
+}   //ViewController
 
-    
+
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -168,6 +168,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
    
 }
+//   SVProgressHUD.dismiss(withDelay: 5)
 
 extension ViewController {
     
@@ -185,3 +186,4 @@ extension ViewController {
     }
     
 }
+
