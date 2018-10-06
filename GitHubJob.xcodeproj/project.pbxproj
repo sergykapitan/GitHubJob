@@ -11,6 +11,7 @@
 		8814A6A72167BCFE006A1B76 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8814A6A62167BCFE006A1B76 /* ItemCell.swift */; };
 		8814A6A92167BD1C006A1B76 /* Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8814A6A82167BD1C006A1B76 /* Ex.swift */; };
 		8814A6AB2167BD35006A1B76 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8814A6AA2167BD35006A1B76 /* Podfile */; };
+		8814A6AF2167F756006A1B76 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8814A6AE2167F756006A1B76 /* SecondViewController.swift */; };
 		88EC66072164B344006CB150 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EC66062164B344006CB150 /* AppDelegate.swift */; };
 		88EC66092164B344006CB150 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EC66082164B344006CB150 /* ViewController.swift */; };
 		88EC660C2164B344006CB150 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88EC660A2164B344006CB150 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 		8814A6A62167BCFE006A1B76 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		8814A6A82167BD1C006A1B76 /* Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ex.swift; sourceTree = "<group>"; };
 		8814A6AA2167BD35006A1B76 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		8814A6AE2167F756006A1B76 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		88EC66032164B344006CB150 /* GitHubJob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubJob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88EC66062164B344006CB150 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88EC66082164B344006CB150 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,13 +82,14 @@
 			children = (
 				88EC66062164B344006CB150 /* AppDelegate.swift */,
 				88EC66082164B344006CB150 /* ViewController.swift */,
+				8814A6AE2167F756006A1B76 /* SecondViewController.swift */,
 				8814A6A42167BCC9006A1B76 /* Item.swift */,
 				8814A6A62167BCFE006A1B76 /* ItemCell.swift */,
+				8814A6A82167BD1C006A1B76 /* Ex.swift */,
 				88EC660A2164B344006CB150 /* Main.storyboard */,
 				88EC660D2164B34D006CB150 /* Assets.xcassets */,
 				88EC660F2164B34D006CB150 /* LaunchScreen.storyboard */,
 				88EC66122164B34D006CB150 /* Info.plist */,
-				8814A6A82167BD1C006A1B76 /* Ex.swift */,
 			);
 			path = GitHubJob;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8814A6AF2167F756006A1B76 /* SecondViewController.swift in Sources */,
 				8814A6A72167BCFE006A1B76 /* ItemCell.swift in Sources */,
 				88EC66092164B344006CB150 /* ViewController.swift in Sources */,
 				8814A6A52167BCC9006A1B76 /* Item.swift in Sources */,

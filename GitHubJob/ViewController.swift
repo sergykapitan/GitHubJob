@@ -13,82 +13,83 @@ import Alamofire
 
 
 
+ //fileprivate
+
+
 
 
 class ViewController: UIViewController {
     
     
-fileprivate var items = [Item]()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
+     var items = [Item]()
    
-    
     @IBOutlet weak var TableView: UITableView!
     
-   
     
-    @IBOutlet weak var UserText: UITextField!
-    
-    @IBOutlet weak var Cell: UITableViewCell!
-    
-   
-    
-    @IBAction func ButtonSearch(_ sender: Any) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let afDelegate = Alamofire.SessionManager.default.delegate
+        
+        afDelegate.taskDidComplete = { urlSession, urlSessionTask, error in
+            print("Task did complete")
+        }
+        
+        afDelegate.dataTaskDidReceiveResponse = { urlSession, urlSessionDataTask, urlResponse in
+            print("Data task did receive response")
+            let urlsrd = URLSession.ResponseDisposition(rawValue: 1)
+            return urlsrd!
+            
+        }
         
         
-            
-         
-              var ip: Int = 0
-            
-           
-                
-                
-                
-                
-                
-                
-               
-                
-                
-                var myString = String(ip)     //перевод Int в String
-                
-                
-                let userText2 = UserText.text?.lowercased()  //значение TextField
-                
-                
-                UserText!.resignFirstResponder()   //закрытие клавиатуры
-                
-                
-                let urlGitHub = "https://jobs.github.com/positions.json?search="
-                
-                guard let gitUrl = URL(string: urlGitHub + userText2! + "&amp;page=" + myString)
-                    else { return }
-                //--------------------------------------alamofire------------------------------------------------------------------
-                Alamofire.request(gitUrl, method: .get).responseJSON { response in
+    }
+    
+    
+     @IBOutlet weak var UserText: UITextField!
+    
+    
+   
+    @IBAction func searchButton(_ sender: Any) {
+  
+        
+          let userText2 = UserText.text?.lowercased()
+    
+        
+ 
+    //закрытие клавиатуры
+//--------------------------------------alamofire------------------------------------------------------------------
+        
+        
+        
+                Alamofire.request("https://jobs.github.com/positions.json?search=" + userText2! + "&amp;page=0", method: .get).responseJSON { response in
                     guard response.result.isSuccess else {                  //Возвращает значение "true", если результат успешен
                         print("Ошибка при запросе данных\(String(describing: response.result.error))")
                         return
                     }
                     
+        
                     guard let arrayOfItems = response.result.value as? [[String:AnyObject]]
                         else {
                             print("Не могу перевести в массив")
                             return
                     }
                     
+                    
+             
+                    
                     for itm in arrayOfItems {
                         let item = Item(
-                            //   albimID: itm["albumId"] as! Int,
-                            //   id: itm["id"] as! Int,
-                            //
+                         
                             title: itm["title"] as? String ?? "Defolt",
                             
                             location: itm["location"] as? String ?? "Defolt",
                             
-                            company_logo: itm["company_logo"] as? String ?? "Defolt"
+                            company_logo: itm["company_logo"] as? String ?? "Defolt",
+                            
+                            details: itm["description"] as? String ?? "DefoltInfo"
+                            
+                            
                         )
                         self.items.append(item)
                     }
@@ -97,44 +98,34 @@ fileprivate var items = [Item]()
                 
                 
                 
-           
+               UserText.resignFirstResponder()
+
        
+    
             
-            
-            DispatchQueue.main.async {
+              DispatchQueue.main.async {
                 self.TableView.reloadData()
-            }
-        }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+             }
+        
+        
+        
+    
+    }   //Button
     
     
     
-    }
+               override func didReceiveMemoryWarning() {
+               super.didReceiveMemoryWarning()
+              // Dispose of any resources that can be recreated.
+              }
+    
+        
+   
+   
+    
+    }  //ViewController
 
     
-
-
-
-//обработка url картинки
-extension UIImageView {
-    
-    func downloadedFrom(link:String) {
-        guard let url = URL(string: link) else { return }
-        URLSession.shared.dataTask(with: url, completionHandler: { (data, _, error) -> Void in
-            guard let data = data , error == nil, let image = UIImage(data: data) else { return }
-            DispatchQueue.main.async { () -> Void in
-                self.image = image
-            }
-        }).resume()
-    }
-    
-}
-//-----------------------------------------------------------------------------------------------------------
-
-//заполнение таблицы
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -150,14 +141,53 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    
+    
+   
+        
+        
     private func configureCell(cell: ItemCell, for indexPath: IndexPath) {
         let item = items[indexPath.row]
         
         cell.locationLabel.text = "\(item.location)"
         cell.titleLabel.text = "\(item.title)  "
-        cell.companyLogo?.downloadedFrom(link: item.company_logo)
-     //   cell.indexRowLabel?.text =   "\(indexPath.row)"
-    }
+       // cell.infoLabel.text = "\(item.info)"
+        
+        if item.company_logo == "Defolt" {
+            cell.companyLogo?.downloadedFrom(link: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Umbrella_Corporation_logo.svg/1200px-Umbrella_Corporation_logo.svg.png")
+            
+        }else{
+            cell.companyLogo?.downloadedFrom(link: item.company_logo)
+            
+            
+           
+            
+            }
+            
+        }
+        
+ //   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+  //      var destinationSVC: SecondViewController = segue.destination as! SecondViewController
+   //      destinationSVC.infoText = item.info
+        
+  //  }
     
+   
+}
+
+extension ViewController {
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? SecondViewController, let cell = sender as? UITableViewCell {
+            let indexPath = TableView.indexPath(for: cell)!
+            let listing = items[indexPath.row]
+            viewController.listing = listing
+        }
+      //  if let viewController = segue.destination as? FilterViewController {
+      //      viewController.location = location
+       //     viewController.delegate = self
+      //  }
+    }
     
 }

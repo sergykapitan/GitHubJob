@@ -8,16 +8,13 @@
 
 import Foundation
 import UIKit
+import Alamofire
 
 class ItemCell: UITableViewCell {
     
     
     @IBOutlet weak var companyLogo: UIImageView!
-    
-    
     @IBOutlet weak var titleLabel: UILabel!
-    
     @IBOutlet weak var locationLabel: UILabel!
     
-    
-}
+   }

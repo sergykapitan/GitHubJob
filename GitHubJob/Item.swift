@@ -7,10 +7,13 @@
 //
 
 import Foundation
+import UIKit
+import Alamofire
 
 struct Item {
     
     let title: String
     let location: String
     let company_logo: String
+    let details: String
 }
