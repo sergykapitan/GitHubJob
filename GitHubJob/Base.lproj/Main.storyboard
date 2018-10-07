@@ -86,7 +86,7 @@
                                     <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="searchButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bX8-xy-Ope"/>
+                                    <action selector="sendRequest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bb5-P8-WKP"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -107,8 +107,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="bK1-zK-lWa"/>
                     <connections>
-                        <outlet property="TableView" destination="Jjx-5Z-KVv" id="2w1-KJ-0ky"/>
                         <outlet property="UserText" destination="HaX-cq-8Cc" id="MtA-Vs-R6R"/>
+                        <outlet property="tableView" destination="Jjx-5Z-KVv" id="KM0-Kl-88s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
